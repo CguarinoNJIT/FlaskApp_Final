@@ -1,7 +1,6 @@
 from typing import List, Dict
 import simplejson as json
-from flask import Flask, request, Response, redirect
-from flask import render_template
+from flask import Flask, request, Response, redirect, render_template
 from flaskext.mysql import MySQL
 from pymysql.cursors import DictCursor
 
@@ -95,7 +94,7 @@ def api_retrieve(biostats_id) -> Response:
     resp = Response(json_result, status=200, mimetype='application/json')
     return resp
 
-
+#This will add a record to the JSON Database
 @app.route('/api/v1/biostats', methods=['POST'])
 def api_add() -> Response:
     content = request.json
@@ -107,7 +106,7 @@ def api_add() -> Response:
     resp = Response(status=201, mimetype='application/json')
     return resp
 
-
+#This will allow edits to a record and update the JSON Database.
 @app.route('/api/v1/biostats/<int:biostats_id>', methods=['PUT'])
 def api_edit(biostats_id) -> Response:
     cursor = mysql.get_db().cursor()
@@ -119,7 +118,7 @@ def api_edit(biostats_id) -> Response:
     resp = Response(status=200, mimetype='application/json')
     return resp
 
-
+#This will delete a record and update the JSON Database.
 @app.route('/api/v1/biostats/<int:biostats_id>', methods=['DELETE'])
 def api_delete(biostats_id) -> Response:
     cursor = mysql.get_db().cursor()
