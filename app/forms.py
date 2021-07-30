@@ -13,7 +13,7 @@ class ContactForm(FlaskForm):
     email = StringField(
         'Email',
         [
-            Email(message=('Not a valid email address.')),
+            Email(message='Not a valid email address.'),
             DataRequired()
         ]
     )
