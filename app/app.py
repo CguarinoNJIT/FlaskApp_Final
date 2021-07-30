@@ -13,6 +13,7 @@ app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = 'root'
 app.config['MYSQL_DATABASE_PORT'] = 3306
 app.config['MYSQL_DATABASE_DB'] = 'biostatsData'
+app.config['SECRET_KEY'] = '79e39995d7d24c5f83f61f6c7089c2e3'
 mysql.init_app(app)
 
 
@@ -129,7 +130,7 @@ def api_delete(biostats_id) -> Response:
     resp = Response(status=200, mimetype='application/json')
     return resp
 
-@app.route("/contact", methods=["GET", "POST"])
+@app.route("/biostats/contact", methods=["GET", "POST"])
 def contact():
     """Standard `contact` form."""
     form = ContactForm()
