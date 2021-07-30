@@ -1,8 +1,9 @@
 from typing import List, Dict
 import simplejson as json
-from flask import Flask, request, Response, redirect, render_template
+from flask import Flask, request, Response, redirect, render_template, url_for
 from flaskext.mysql import MySQL
 from pymysql.cursors import DictCursor
+from forms import ContactForm
 
 app = Flask(__name__)
 mysql = MySQL(cursorclass=DictCursor)
@@ -128,6 +129,17 @@ def api_delete(biostats_id) -> Response:
     resp = Response(status=200, mimetype='application/json')
     return resp
 
+@app.route("/contact", methods=["GET", "POST"])
+def contact():
+    """Standard `contact` form."""
+    form = ContactForm()
+    if form.validate_on_submit():
+        return redirect(url_for("success"))
+    return render_template(
+        "contact.html",
+        form=form,
+        template="form-template"
+    )
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
