@@ -5,9 +5,9 @@ from flaskext.mysql import MySQL
 from pymysql.cursors import DictCursor
 from forms import ContactForm
 
-app = Flask(__name__, template_folder='templates')
+app = Flask(__name__)
+app.config.from_object('config.Config')
 mysql = MySQL(cursorclass=DictCursor)
-app.config.from_pyfile('config.py')
 mysql.init_app(app)
 
 @app.route('/', methods=['GET'])
