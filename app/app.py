@@ -5,7 +5,7 @@ from flaskext.mysql import MySQL
 from pymysql.cursors import DictCursor
 from forms import ContactForm
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates')
 mysql = MySQL(cursorclass=DictCursor)
 
 app.config['MYSQL_DATABASE_HOST'] = 'db'
@@ -35,7 +35,7 @@ def record_view(biostats_id):
 
 
 @app.route('/edit/<int:biostats_id>', methods=['GET'])
-def form_edit_get(biostats_id):
+def form_edit_get(biostats_id):ß
     cursor = mysql.get_db().cursor()
     cursor.execute('SELECT * FROM biostatsImport WHERE id=%s', biostats_id)
     result = cursor.fetchall()
