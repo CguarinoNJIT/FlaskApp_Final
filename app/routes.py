@@ -1,9 +1,11 @@
 import simplejson as json
 from flask import  request, Response, redirect, render_template, url_for
 from forms import ContactForm
+from __init__ import mysql, app
 
-from __init__ import mysql,app
-
+__all__ = ['index','record_view','form_edit_get','form_update_post',
+           'form_insert_get','form_insert_post','form_delete_post','api_browse',
+           'api_retrieve','api_add','api_edit','api_delete','contact']
 
 @app.route('/', methods=['GET'])
 def index():

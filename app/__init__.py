@@ -3,12 +3,12 @@ from flaskext.mysql import MySQL
 from pymysql.cursors import DictCursor
 
 mysql = MySQL(cursorclass = DictCursor)
+app = Flask(__name__)
 __all__ = ['init_app']
 
 def init_app():
 
     #Initialize the Core Application
-    app = Flask(__name__)
     app.config.from_object('config.Config')
 
     #Initialize the Plugins
@@ -16,6 +16,6 @@ def init_app():
 
     with app.app_context():
         #Routing
-        from . import routes
+        import routes
 
         return app
