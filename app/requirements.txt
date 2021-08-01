@@ -4,3 +4,4 @@ mysql-connector
 simplejson
 flask_wtf
 email_validator
+Flask-Cache

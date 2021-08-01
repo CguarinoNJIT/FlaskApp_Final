@@ -16,7 +16,6 @@ app.config['MYSQL_DATABASE_DB'] = 'biostatsData'
 app.config['SECRET_KEY'] = '79e39995d7d24c5f83f61f6c7089c2e3'
 mysql.init_app(app)
 
-
 @app.route('/', methods=['GET'])
 def index():
     user = {'username': 'BioStats'}
@@ -35,7 +34,7 @@ def record_view(biostats_id):
 
 
 @app.route('/edit/<int:biostats_id>', methods=['GET'])
-def form_edit_get(biostats_id):ß
+def form_edit_get(biostats_id):
     cursor = mysql.get_db().cursor()
     cursor.execute('SELECT * FROM biostatsImport WHERE id=%s', biostats_id)
     result = cursor.fetchall()
@@ -141,6 +140,23 @@ def contact():
         form=form,
         template="form-template"
     )
+
+#Error Handling
+@app.errorhandler(404)
+def not_found():
+    """Page not found."""
+    return Response(render_template("404Error.html"), 404)
+
+@app.errorhandler(400)
+def bad_request():
+    """Bad request."""
+    return Response(render_template("400Error.html"), 400)
+
+
+@app.errorhandler(500)
+def server_error():
+    """Internal server error."""
+    return Response(render_template("500Error.html"),500)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
