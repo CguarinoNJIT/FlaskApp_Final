@@ -16,6 +16,16 @@ def init_app():
 
     with app.app_context():
         #Routing
-        import routes
+        from app.home import home_routes
+        from app.form import form_routes
+        from app.contact import contact_routes
+        from app.errors import errors_routes
+        import app.api_routes
+
+        #Register Blueprints
+        app.register_blueprint(home_routes.home_bp)
+        app.register_blueprint(form_routes.form_bp)
+        app.register_blueprint(contact_routes.contact_bp)
+        app.register_blueprint(errors_routes.errors_bp)
 
         return app

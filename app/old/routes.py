@@ -1,14 +1,11 @@
-from typing import List, Dict
 import simplejson as json
-from flask import Flask, request, Response, redirect, render_template, url_for
-from flaskext.mysql import MySQL
-from pymysql.cursors import DictCursor
-from forms import ContactForm
+from flask import  request, Response, redirect, render_template, url_for
+from app.contact.forms import ContactForm
+from __init__ import mysql, app
 
-app = Flask(__name__)
-app.config.from_object('config.Config')
-mysql = MySQL(cursorclass=DictCursor)
-mysql.init_app(app)
+__all__ = ['index','record_view','form_edit_get','form_update_post',
+           'form_insert_get','form_insert_post','form_delete_post','api_browse',
+           'api_retrieve','api_add','api_edit','api_delete','contact']
 
 @app.route('/', methods=['GET'])
 def index():
@@ -150,7 +147,4 @@ def bad_request():
 @app.errorhandler(500)
 def server_error():
     """Internal server error."""
-    return Response(render_template("500Error.html"),500)
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    return Response(render_template("500Error.html"), 500)
