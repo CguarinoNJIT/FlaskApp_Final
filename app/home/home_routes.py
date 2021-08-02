@@ -1,6 +1,6 @@
 from flask import Blueprint
 from flask import  render_template, url_for
-from app.__init__ import mysql
+import mysql
 
 
 # Blueprint Configuration

@@ -1,6 +1,6 @@
 from flask import Blueprint
 from flask import  request, redirect, render_template
-from app.__init__ import mysql
+import mysql
 
 # Blueprint Configuration
 form_bp = Blueprint('form_bp', __name__,template_folder='form/templates')

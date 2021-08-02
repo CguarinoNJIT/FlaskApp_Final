@@ -18,15 +18,15 @@ def init_app():
     with application.app_context():
         # Routing
         from home import home_routes
-        from app.form import form_routes
-        from app.contact import contact_routes
-        from app.errors import errors_routes
-        import app.api_routes
+        from form import form_routes
+        from contact import contact_routes
+        from errors import errors_routes
+        import api_routes
 
         # Register Blueprints
-        app.register_blueprint(home_routes.home_bp)
-        app.register_blueprint(form_routes.form_bp)
-        app.register_blueprint(contact_routes.contact_bp)
-        app.register_blueprint(errors_routes.errors_bp)
+        application.register_blueprint(home_routes.home_bp)
+        application.register_blueprint(form_routes.form_bp)
+        application.register_blueprint(contact_routes.contact_bp)
+        application.register_blueprint(errors_routes.errors_bp)
 
         return application

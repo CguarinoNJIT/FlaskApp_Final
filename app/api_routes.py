@@ -2,7 +2,7 @@
 from flask import Blueprint
 import simplejson as json
 from flask import  request, Response
-from app.__init__ import mysql, app
+import mysql
 
 # Blueprint Configuration
 api_bp = Blueprint('api_bp', __name__)

@@ -3,6 +3,7 @@ from flask_wtf import FlaskForm, RecaptchaField
 from wtforms import StringField, TextField, SubmitField
 from wtforms.validators import DataRequired, Length, Email
 
+__all__ = ['ContactForm']
 
 class ContactForm(FlaskForm):
     """Contact form."""
