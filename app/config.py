@@ -1,12 +1,12 @@
-#Flask Configurations:
+# Flask Configurations:
 from os import environ, path
 from dotenv import load_dotenv
 
 basedir = path.abspath(path.dirname(__file__))
-load_dotenv(path.join(basedir, 'app/.env'))
+load_dotenv(path.join(basedir, '.env'))
+
 
 class Config:
-
     MYSQL_DATABASE_HOST = 'db'
     TEMPLATES_FOLDER = 'templates'
     MYSQL_DATABASE_USER = 'root'
@@ -15,8 +15,8 @@ class Config:
     MYSQL_DATABASE_DB = 'biostatsData'
     SECRET_KEY = environ.get('SECRET_KEY')
 
-#We could add other classes in this file so that we could have different configuration enviroments depending on what we are trying to do. Not nessesary for this project.
-#EX:
+# We could add other classes in this file so that we could have different configuration enviroments depending on what we are trying to do. Not nessesary for this project.
+# EX:
 # class ProdConfig(Config):
 #     FLASK_ENV = 'production'
 #     DEBUG = False
