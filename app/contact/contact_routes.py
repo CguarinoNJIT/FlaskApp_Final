@@ -9,7 +9,7 @@ __all__ = ['contact']
 @contact_bp.route("/biostats/contact", methods=["GET", "POST"])
 def contact():
     """Standard `contact` form."""
-    from forms import ContactForm
+    from app.contact.forms import ContactForm
     form = ContactForm()
     if form.validate_on_submit():
         return redirect(url_for("success"))

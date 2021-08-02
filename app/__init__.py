@@ -2,10 +2,10 @@ from flask import Flask
 from flaskext.mysql import MySQL
 from pymysql.cursors import DictCursor
 
-mysql = MySQL(cursorclass=DictCursor)
+db_var = MySQL(cursorclass=DictCursor)
 application = Flask(__name__)
 
-__all__ = ['init_app','mysql','application']
+__all__ = ['init_app','db_var','application']
 
 
 def init_app():
@@ -13,7 +13,7 @@ def init_app():
     application.config.from_object('config.Config')
 
     # Initialize the Plugins
-    mysql.init_app(application)
+    db_var.init_app(application)
 
     with application.app_context():
         # Routing
