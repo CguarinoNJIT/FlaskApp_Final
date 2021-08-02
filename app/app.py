@@ -2,9 +2,9 @@ from flask import Flask
 from flaskext.mysql import MySQL
 from pymysql.cursors import DictCursor
 
-__all__ = ['init_app','get_db','get_flask_app']
+__all__ = ['init_app','db_fun','get_flask_app']
 
-def get_db():
+def db_fun():
     db_var = MySQL(cursorclass=DictCursor)
     return db_var
 
@@ -12,7 +12,7 @@ def get_flask_app():
     application = Flask(__name__)
     return application
 
-def init_app(application: Flask=get_flask_app(), db_var: MySQL=get_db()):
+def init_app(application: Flask=get_flask_app(), db_var: MySQL=db_fun()):
     # Initialize the Core Application
     application.config.from_object('config.Config')
 

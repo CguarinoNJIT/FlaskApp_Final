@@ -1,7 +1,8 @@
 from flask import Blueprint
 from flask import  request, redirect, render_template
-from __init__ import db_var
+from app import db_fun
 
+db_var = db_fun()
 
 # Blueprint Configuration
 form_bp = Blueprint('form_bp', __name__,template_folder='form/templates')

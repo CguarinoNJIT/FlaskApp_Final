@@ -1,7 +1,9 @@
 from flask import Blueprint
 import simplejson as json
 from flask import  request, Response
-from  app import db_var
+from app import db_fun
+
+db_var = db_fun
 
 # Blueprint Configuration
 api_bp = Blueprint('api_bp', __name__)
