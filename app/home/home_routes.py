@@ -1,6 +1,6 @@
 from flask import Blueprint
 from flask import  render_template, url_for
-from  app.run import db_var
+from  app.__init__ import db_var
 
 
 # Blueprint Configuration
