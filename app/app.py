@@ -12,7 +12,7 @@ def get_flask_app():
     application = Flask(__name__)
     return application
 
-def init_app(application=get_flask_app(): Flask, db_var=get_db(): MySQL):
+def init_app(application: Flask=get_flask_app(), db_var: MySQL=get_db()):
     # Initialize the Core Application
     application.config.from_object('config.Config')
 
