@@ -1,12 +1,13 @@
 from flask import Blueprint
 from flask import  render_template, url_for
-from  __init__ import db_var
-
+import get_db
 
 # Blueprint Configuration
 home_bp = Blueprint('home_bp', __name__,template_folder='home/templates')
 
 __all__ = ['index','record_view']
+
+db_var = get_db()
 
 #Routes
 @home_bp.route('/', methods=['GET'])
