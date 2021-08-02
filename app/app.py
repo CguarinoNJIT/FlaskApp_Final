@@ -2,13 +2,17 @@ from flask import Flask
 from flaskext.mysql import MySQL
 from pymysql.cursors import DictCursor
 
-db_var = MySQL(cursorclass=DictCursor)
-application = Flask(__name__)
+__all__ = ['init_app','get_db','get_flask_app']
 
-__all__ = ['init_app','db_var','application']
+def get_db():
+    db_var = MySQL(cursorclass=DictCursor)
+    return db_var
 
+def get_flask_app():
+    application = Flask(__name__)
+    return application
 
-def init_app():
+def init_app(application: Flask, db_var: MySQL):
     # Initialize the Core Application
     application.config.from_object('config.Config')
 
