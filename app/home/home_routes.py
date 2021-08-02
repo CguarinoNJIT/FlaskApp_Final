@@ -1,6 +1,6 @@
 from flask import Blueprint
 from flask import  render_template, url_for
-import get_db
+from ..app import get_db
 
 # Blueprint Configuration
 home_bp = Blueprint('home_bp', __name__,template_folder='home/templates')
