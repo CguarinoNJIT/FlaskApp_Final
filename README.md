@@ -1,17 +1,12 @@
 # Project Description 
-This project is a homework assignment to teach how to get Pycharm setup with Docker, Flask, MySQL, and Postman
-# a. Pycharm Data Tables
-![pycharm_database](screenshots/pycharm_database.png)
-# b. Home Page 
-![Homepage](screenshots/Homepage.png)
-# c. View Page 
-![View](screenshots/View.png)
-# d. Add Page 
-![Add](screenshots/Add.png)
-![Add_Homepage](screenshots/Add_Homepage.png)
-# e. Updated Record 
-![Edit](screenshots/Edit.png)
-![Updated_Home](screenshots/Updated_Home.png)
-# f. Deleted Record 
-![Delete](screenshots/Delete.png)
-![Record_Deleted](screenshots/Record_Deleted.png)
+## Final Project
+Flask Tutorial - https://hackersandslackers.com/your-first-flask-application
+# 1. Creating Your First Flask Application
+# 2. Rendering Pages in Flask Using Jinja
+# 3. Handling Forms in Flask with Flask-WTF
+# 4. The Art of Routing in Flask
+# 5. Configuring Your Flask App 
+> Completed this during another tutorial. 
+# 6. 
+# 7. 
+# 8. 
