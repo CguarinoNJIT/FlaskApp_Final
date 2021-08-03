@@ -11,7 +11,6 @@ Flask Tutorial - https://hackersandslackers.com/your-first-flask-application
 # 4. The Art of Routing in Flask
 # 5. Configuring Your Flask App 
 > Completed this during another tutorial. 
+> ![Screen Shot 2021-08-03 at 12 28 14 PM](https://user-images.githubusercontent.com/85355712/128052006-ae2c193d-967c-4004-86d2-8dccd9774c45.png)
 # 6. Demystifying Flask’s Application Factory 
 > Completed
-# 7. 
-# 8. 
