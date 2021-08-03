@@ -1,11 +1,13 @@
 import simplejson as json
-from flask import  request, Response, redirect, render_template, url_for
+from flask import request, Response, redirect, render_template, url_for, make_response
+from datetime import datetime as dt
+from models import User
 from forms import ContactForm, SignupForm
-from __init__ import mysql, app
+from __init__ import mysql, app, db
 
 __all__ = ['index','record_view','form_edit_get','form_update_post',
            'form_insert_get','form_insert_post','form_delete_post','api_browse',
-           'api_retrieve','api_add','api_edit','api_delete','contact']
+           'api_retrieve','api_add','api_edit','api_delete','contact','user_records','create_user','success']
 
 #Homepage
 @app.route('/', methods=['GET'])
@@ -172,3 +174,37 @@ def bad_request():
 def server_error():
     """Internal server error."""
     return Response(render_template("500Error.html"),500)
+
+@app.route("/biostats/users", methods=["GET"])
+def user_records():
+    """Create a user via query string parameters."""
+    username = request.args.get("user")
+    email = request.args.get("email")
+    if username and email:
+        existing_user = User.query.filter(
+            User.username == username or User.email == email
+        ).first()
+        if existing_user:
+            return make_response(f"{username} ({email}) already created!")
+        new_user = User(
+            username=username,
+            email=email,
+            created=dt.now(),
+            bio="In West Philadelphia born and raised, \
+            on the playground is where I spent most of my days",
+            admin=False,
+        )  # Create an instance of the User class
+        db.session.add(new_user)  # Adds new User record to database
+        db.session.commit()  # Commits all changes
+        redirect(url_for("user_records"))
+    return render_template("users.html", users=User.query.all(), title="Show Users")
+
+@app.route('/', methods=['GET'])
+def create_user():
+    """Create a user."""
+    ...
+    return render_template(
+        'users.html',
+        users=User.query.all(),
+        title="Show Users"
+    )

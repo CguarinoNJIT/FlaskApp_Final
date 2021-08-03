@@ -17,6 +17,11 @@ class Config:
     RECAPTCHA_PUBLIC_KEY = "iubhiukfgjbkhfvgkdfm"
     RECAPTCHA_PARAMETERS = {"size": "100%"}
 
+    # Database
+    SQLALCHEMY_DATABASE_URI = environ.get("SQLALCHEMY_DATABASE_URI")
+    SQLALCHEMY_ECHO = False
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+
 #We could add other classes in this file so that we could have different configuration enviroments depending on what we are trying to do. Not nessesary for this project.
 #EX:
 # class ProdConfig(Config):

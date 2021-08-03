@@ -11,3 +11,5 @@ Flask Tutorial - https://hackersandslackers.com/your-first-flask-application
 > Completed
 # 7. 
 # 8. 
+# 9. Connect Flask to a Database with Flask-SQLAlchemy 
+> I could not get this to work properly. I will continue to work on it. 
