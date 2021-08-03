@@ -158,13 +158,14 @@ def signup():
         title="Signup Form"
     )
 
-# @app.route("/success", methods=["GET", "POST"])
-# def success():
-#     """Generic success page upon form submission."""
-#     return render_template(
-#         "success.html",
-#         template="success-template"
-#     )
+@app.route("/biostats/success", methods=["GET", "POST"])
+def success():
+    """Generic success page upon form submission."""
+    return render_template(
+        "success.html",
+        template="success-template"
+    )
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)

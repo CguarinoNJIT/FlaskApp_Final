@@ -1,5 +1,12 @@
 {% extends 'layout.html' %}
 
+{% block styles %}
+    <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='css/forms.css') }}"
+            type="text/css"
+    />
+{% endblock %}
 
 {% block content %}
 
@@ -44,8 +51,8 @@
         {% endif %}
       </fieldset>
 
-      {{ form.submit }}
-
+{#      {{ form.submit }}#}
+    <a class="btn btn-success pl-2 lr-2 ml-3" href="/biostats/success">Submit<span class="sr-only">(current)</span></a>
       </form>
   </div>
 
