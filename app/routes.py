@@ -156,6 +156,13 @@ def success():
         template="success-template"
     )
 
+@main_bp.route("/logout")
+@login_required
+def logout():
+    """User log-out logic."""
+    logout_user()
+    return redirect(url_for('auth_bp.login'))
+
 #Error Handling
 @app.errorhandler(404)
 def not_found():

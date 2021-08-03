@@ -6,3 +6,4 @@ flask_wtf
 email_validator
 Flask-Cache
 python-dotenv
+Flask-Session

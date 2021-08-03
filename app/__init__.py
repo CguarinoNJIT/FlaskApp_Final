@@ -1,9 +1,12 @@
 from flask import Flask
 from flaskext.mysql import MySQL
 from pymysql.cursors import DictCursor
+from flask_session import Session
 
 mysql = MySQL(cursorclass = DictCursor)
 app = Flask(__name__)
+sess = Session()
+
 __all__ = ['init_app']
 
 def init_app():
