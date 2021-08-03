@@ -1,18 +1,22 @@
 from typing import List, Dict
 import simplejson as json
-from flask import Flask, request, Response, redirect
-from flask import render_template
+from flask import Flask, request, Response, redirect, render_template, url_for
 from flaskext.mysql import MySQL
 from pymysql.cursors import DictCursor
+from forms import ContactForm, SignupForm
 
 app = Flask(__name__)
-mysql = MySQL(cursorclass=DictCursor)
-
+#app.config.from_object("config.Config")
 app.config['MYSQL_DATABASE_HOST'] = 'db'
 app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = 'root'
 app.config['MYSQL_DATABASE_PORT'] = 3306
 app.config['MYSQL_DATABASE_DB'] = 'biostatsData'
+app.config['SECRET_KEY'] = '79e39995d7d24c5f83f61f6c7089c2e3'
+app.config["RECAPTCHA_PUBLIC_KEY"] = "iubhiukfgjbkhfvgkdfm"
+app.config["RECAPTCHA_PARAMETERS"] = {"size": "100%"}
+
+mysql = MySQL(cursorclass=DictCursor)
 mysql.init_app(app)
 
 
@@ -95,7 +99,7 @@ def api_retrieve(biostats_id) -> Response:
     resp = Response(json_result, status=200, mimetype='application/json')
     return resp
 
-
+#This will add a record to the JSON Database
 @app.route('/api/v1/biostats', methods=['POST'])
 def api_add() -> Response:
     content = request.json
@@ -107,7 +111,7 @@ def api_add() -> Response:
     resp = Response(status=201, mimetype='application/json')
     return resp
 
-
+#This will allow edits to a record and update the JSON Database.
 @app.route('/api/v1/biostats/<int:biostats_id>', methods=['PUT'])
 def api_edit(biostats_id) -> Response:
     cursor = mysql.get_db().cursor()
@@ -119,7 +123,7 @@ def api_edit(biostats_id) -> Response:
     resp = Response(status=200, mimetype='application/json')
     return resp
 
-
+#This will delete a record and update the JSON Database.
 @app.route('/api/v1/biostats/<int:biostats_id>', methods=['DELETE'])
 def api_delete(biostats_id) -> Response:
     cursor = mysql.get_db().cursor()
@@ -128,6 +132,39 @@ def api_delete(biostats_id) -> Response:
     mysql.get_db().commit()
     resp = Response(status=200, mimetype='application/json')
     return resp
+
+@app.route("/biostats/contact", methods=["GET", "POST"])
+def contact():
+    """Standard `contact` form."""
+    form = ContactForm()
+    if form.validate_on_submit():
+        return redirect(url_for("index"))
+    return render_template(
+        "contact.html",
+        form=form,
+        template="form-template"
+    )
+
+@app.route("/biostats/signup", methods=["GET", "POST"])
+def signup():
+    """User sign-up form for account creation."""
+    form = SignupForm()
+    if form.validate_on_submit():
+        return redirect(url_for("success"))
+    return render_template(
+        "signup.html",
+        form=form,
+        template="form-template",
+        title="Signup Form"
+    )
+
+@app.route("/biostats/success", methods=["GET", "POST"])
+def success():
+    """Generic success page upon form submission."""
+    return render_template(
+        "success.html",
+        template="success-template"
+    )
 
 
 if __name__ == '__main__':
