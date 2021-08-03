@@ -1,12 +1,13 @@
 import simplejson as json
 from flask import  request, Response, redirect, render_template, url_for
-from forms import ContactForm
-from __init__ import mysql, app
+from forms import ContactForm, SignupForm
+from application import mysql, app
 
 __all__ = ['index','record_view','form_edit_get','form_update_post',
            'form_insert_get','form_insert_post','form_delete_post','api_browse',
            'api_retrieve','api_add','api_edit','api_delete','contact']
 
+#Homepage
 @app.route('/', methods=['GET'])
 def index():
     user = {'username': 'BioStats'}
@@ -15,7 +16,7 @@ def index():
     result = cursor.fetchall()
     return render_template('index.html', title='Home', user=user, biostats=result)
 
-
+#View Record
 @app.route('/view/<int:biostats_id>', methods=['GET'])
 def record_view(biostats_id):
     cursor = mysql.get_db().cursor()
@@ -23,7 +24,7 @@ def record_view(biostats_id):
     result = cursor.fetchall()
     return render_template('view.html', title='View Form', biostats=result[0])
 
-
+# Edit page
 @app.route('/edit/<int:biostats_id>', methods=['GET'])
 def form_edit_get(biostats_id):
     cursor = mysql.get_db().cursor()
@@ -31,7 +32,7 @@ def form_edit_get(biostats_id):
     result = cursor.fetchall()
     return render_template('edit.html', title='Edit Form', biostats=result[0])
 
-
+#Update DB
 @app.route('/edit/<int:biostats_id>', methods=['POST'])
 def form_update_post(biostats_id):
     cursor = mysql.get_db().cursor()
@@ -43,12 +44,12 @@ def form_update_post(biostats_id):
     mysql.get_db().commit()
     return redirect("/", code=302)
 
-
+#New Record page
 @app.route('/biostats/new', methods=['GET'])
 def form_insert_get():
     return render_template('new.html', title='New Profile')
 
-
+# Update DB with new record.
 @app.route('/biostats/new', methods=['POST'])
 def form_insert_post():
     cursor = mysql.get_db().cursor()
@@ -58,6 +59,7 @@ def form_insert_post():
     mysql.get_db().commit()
     return redirect("/", code=302)
 
+#Delete Record
 @app.route('/delete/<int:biostats_id>', methods=['POST'])
 def form_delete_post(biostats_id):
     cursor = mysql.get_db().cursor()
@@ -120,6 +122,7 @@ def api_delete(biostats_id) -> Response:
     resp = Response(status=200, mimetype='application/json')
     return resp
 
+#Forms
 @app.route("/biostats/contact", methods=["GET", "POST"])
 def contact():
     """Standard `contact` form."""
@@ -130,6 +133,27 @@ def contact():
         "contact.html",
         form=form,
         template="form-template"
+    )
+
+@app.route("/biostats/signup", methods=["GET", "POST"])
+def signup():
+    """User sign-up form for account creation."""
+    form = SignupForm()
+    if form.validate_on_submit():
+        return redirect(url_for("success"))
+    return render_template(
+        "signup.html",
+        form=form,
+        template="form-template",
+        title="Signup Form"
+    )
+
+@app.route("/biostats/success", methods=["GET", "POST"])
+def success():
+    """Generic success page upon form submission."""
+    return render_template(
+        "success.html",
+        template="success-template"
     )
 
 #Error Handling

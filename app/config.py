@@ -14,6 +14,8 @@ class Config:
     MYSQL_DATABASE_PORT = 3306
     MYSQL_DATABASE_DB = 'biostatsData'
     SECRET_KEY = environ.get('SECRET_KEY')
+    RECAPTCHA_PUBLIC_KEY = "iubhiukfgjbkhfvgkdfm"
+    RECAPTCHA_PARAMETERS = {"size": "100%"}
 
 #We could add other classes in this file so that we could have different configuration enviroments depending on what we are trying to do. Not nessesary for this project.
 #EX:
