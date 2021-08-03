@@ -1,6 +1,7 @@
 # Project Description 
 ## Final Project
 Flask Tutorial - https://hackersandslackers.com/your-first-flask-application
+### To Run - 
 # 1. Creating Your First Flask Application
 ![Screen Shot 2021-08-03 at 12 34 05 PM](https://user-images.githubusercontent.com/85355712/128052790-6415998e-d341-4d14-bdb8-e96278b2934c.png)
 ![Screen Shot 2021-08-03 at 12 22 22 PM](https://user-images.githubusercontent.com/85355712/128052878-a302fcdc-eacf-4bfb-9701-7fbd560b250c.png)
