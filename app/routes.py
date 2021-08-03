@@ -1,12 +1,12 @@
-from flask import current_app as app
-from flask import render_template, request, redirect, Response
-from flaskext.mysql import MySQL
+from flask import current_app as app, make_response
+from flask import render_template, request, redirect, Response, url_for
 import simplejson as json
-from pymysql.cursors import DictCursor
+from forms import ContactForm, SignupForm
+from application import mysql
 
-
-mysql = MySQL(cursorclass=DictCursor)
-
+__all__ = ['index','record_view','form_edit_get','form_update_post',
+           'form_insert_get','form_insert_post','form_delete_post','api_browse',
+           'api_retrieve','api_add','api_edit','api_delete','contact', 'signup','success']
 
 @app.route('/', methods=['GET'])
 def index():
@@ -120,3 +120,60 @@ def api_delete(biostats_id) -> Response:
     mysql.get_db().commit()
     resp = Response(status=200, mimetype='application/json')
     return resp
+
+@app.route("/biostats/contact", methods=["GET", "POST"])
+def contact():
+    """Standard `contact` form."""
+    form = ContactForm()
+    if form.validate_on_submit():
+        return redirect(url_for("index"))
+    return render_template(
+        "contact.html",
+        form=form,
+        template="form-template"
+    )
+
+@app.route("/biostats/signup", methods=["GET", "POST"])
+def signup():
+    """User sign-up form for account creation."""
+    form = SignupForm()
+    if form.validate_on_submit():
+        return redirect(url_for("success"))
+    return render_template(
+        "signup.html",
+        form=form,
+        template="form-template",
+        title="Signup Form"
+    )
+
+@app.route("/biostats/success", methods=["GET", "POST"])
+def success():
+    """Generic success page upon form submission."""
+    return render_template(
+        "success.html",
+        template="success-template"
+    )
+
+@app.errorhandler(404)
+def not_found():
+    """Page not found."""
+    return make_response(
+        render_template("404.html"),
+        404
+     )
+
+@app.errorhandler(400)
+def bad_request():
+    """Bad request."""
+    return make_response(
+        render_template("400.html"),
+        400
+    )
+
+@app.errorhandler(500)
+def server_error():
+    """Internal server error."""
+    return make_response(
+        render_template("500.html"),
+        500
+    )
