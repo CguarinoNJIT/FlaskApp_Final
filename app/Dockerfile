@@ -10,4 +10,3 @@ RUN pip install -r requirements.txt --upgrade pip
 COPY . /app
 CMD python wsgi.py
 
-
