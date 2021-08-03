@@ -135,7 +135,7 @@ def contact():
     """Standard `contact` form."""
     form = ContactForm()
     if form.validate_on_submit():
-        return redirect(url_for("success"))
+        return redirect(url_for("index"))
     return render_template(
         "contact.html",
         form=form,
