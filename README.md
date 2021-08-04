@@ -1,4 +1,34 @@
-# Project Description 
+# Project Description
+TODO
+
+# Run from Command Line Interface
+This project requires [Docker](https://www.docker.com/) as a dependency. This application uses docker compose to launch a container running a flask application that uses a uses a MySQL database running in a separate container. This application also (eventually) uses a Redis database running in a docker container to store user session data.
+
+To run this project navigate to the project home directory and run all of the commands below in order.
+
+1) This command will build all docker containers in the `docker-compose.yaml` file.
+    ```bash
+    docker-compose build
+    ```
+
+2) This command will run all built docker containers.
+   ```bash
+   docker-compose up
+   ```
+
+3) At this point navaigate to `localhost:5000` in your browser and interact with the Flask web application.
+
+4) Use this command to confirm that docker container are running as expected.
+    ```bash
+    docker ps
+    ```
+
+5) This command will stop all running docker containers.
+    ```bash
+    docker-compose down
+    ```
+
+# Breakdown
 ## Final Project
 Flask Tutorial - https://hackersandslackers.com/your-first-flask-application
 ### To Run - 
